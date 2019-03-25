@@ -1,0 +1,66 @@
+{% extends "__base__.html" %}
+{% block title %}{% endblock title %}
+{% block content %}
+                <div class="dashboard-header m-4">
+                    <div class="dashboard-menu">
+                        <div class="menu-item border-dashed">
+                            <a href="{% url 'add_recipe' %}">
+                                <i class="far fa-plus-square icon-plus-square"></i>
+                                <span class="title">dodaj przepis</span>
+                            </a>
+                        </div>
+                        <div class="menu-item border-dashed">
+                            <a href="{% url 'add_plan' %}">
+                                <i class="far fa-plus-square icon-plus-square"></i>
+                                <span class="title">dodaj plan</span>
+                            </a>
+                        </div>
+                        <!--
+                        <div class="menu-item border-dashed">
+                            <a href="">
+                                <i class="far fa-plus-square icon-plus-square"></i>
+                                <span class="title">dodaj przepis do planu</span>
+                            </a>
+                        </div>
+                        -->
+                    </div>
+
+                    <div class="dashboard-alerts">
+                        <div class="alert-item alert-info">
+                            <i class="fas icon-circle fa-info-circle"></i>
+                            <span class="font-weight-bold">Liczba przepisów: {{ recipes }}</span>
+                        </div>
+                        <div class="alert-item alert-light">
+                            <i class="far icon-calendar fa-calendar-alt"></i>
+                            <span class="font-weight-bold">Liczba planów: {{ plans }}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="m-4 p-4 border-dashed">
+                    <h2 class="dashboard-content-title">
+                        <span>Ostatnio dodany plan:</span> {{ plans.name }}
+                    </h2>
+                    <table class="table">
+
+                        <thead>
+                        {% for detail in plan_details %}
+                            <tr class="d-flex">
+
+                                <th class="col-2">{{ detail.day_name_id.get_day_name_display }}</th>
+                                <th class="col-8"></th>
+                                <th class="col-2"></th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr class="d-flex">
+                                <td class="col-2">{{ detail.meal_name }}</td>
+                                <td class="col-8">placeholder</td>
+                                <td class="col-2"><a href="/recipe?recipe_id={{ detail.recipe_id_id }}"  class="btn btn-info rounded-0 text-light m-1">Szczegóły</a></td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+
+                </div>
+{% endblock content %}
